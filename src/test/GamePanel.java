@@ -7,6 +7,8 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import entities.Entity;
+import entities.NPC_Ghost;
 import entities.Player;
 import objects.SuperObjects;
 import tiles.TileManager;
@@ -39,6 +41,7 @@ public class GamePanel extends JPanel implements Runnable {
 	Thread gameThread;
 	UI ui = new UI(this);
 	KeyHandler keyH = new KeyHandler();
+	public Entity[] npc = new Entity[10];
 	AssetSetter aSetter = new AssetSetter(this);
 	Sounds music = new Sounds();
 	Sounds soundEffect = new Sounds();
@@ -59,6 +62,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public void setupGame()
 	{
 		aSetter.setAssets();
+		aSetter.setnpc();
 		gameState = statePlay;
 	}
 	
@@ -138,6 +142,15 @@ public class GamePanel extends JPanel implements Runnable {
 		
 		//PLAYER
 		player.draw(g2);
+		
+		//NPC
+		for(int i = 0; i < npc.length; i++)
+		{
+			if(npc[i] != null)
+			{
+				npc[i].draw(g2);
+			}
+		}
 		
 		//UI
 		ui.draw(g2);

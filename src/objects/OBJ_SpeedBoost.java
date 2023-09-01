@@ -18,7 +18,7 @@ public class OBJ_SpeedBoost extends SuperObjects {
 		try
 		{
 			image = ImageIO.read(getClass().getResourceAsStream("/objects/speedBoost.png"));
-			image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
+			image = UtilityTool.scaleImage(image, gp.tileSize, gp.tileSize);
 			
 		}catch(IOException e)
 		{

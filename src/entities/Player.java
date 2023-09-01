@@ -7,69 +7,45 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import enums.EnumEntitySpeed;
 import test.GamePanel;
 import test.KeyHandler;
 import test.UtilityTool;
 
 public class Player extends Entity{
 
-	GamePanel gp;
 	KeyHandler keyH;
-	
-	BufferedImage up, down, left, right;
-	
 	
 	public final int screenX;
 	public final int screenY;
 	
-	
 	public Player(GamePanel gp, KeyHandler keyH)
 	{
-		this.gp = gp;
+		super(gp);
+		this.worldX = gp.tileSize;
+		this.worldY = gp.tileSize;
+		
+		entitySpeed = EnumEntitySpeed.NORMAL;
+		speed = entitySpeed.speed;
+		
 		this.keyH = keyH;
 		
 		this.screenX = gp.screenWidthSize/2 - (gp.tileSize/2);
 		this.screenY = gp.screenHeightSize/2 - (gp.tileSize/2);
 		
-		setDefaultValues();
 		getPlayerImage();
 		
 		solidArea = new Rectangle(8, 16, 32, 32);
-		
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
-		
-	}
-	
-	public void setDefaultValues()
-	{
-		worldX = gp.tileSize;
-		worldY = gp.tileSize;
-		speed = 4;
-		direction = "down";
 	}
 	
 	public void getPlayerImage()
 	{
-		
-		up = setup("2");
-		down = setup("1");
-		left = setup("3");
-		right = setup("4");
-	}
-	
-	public BufferedImage setup(String imageName)
-	{
-		UtilityTool uTool = new UtilityTool();
-		BufferedImage image = null;
-		try {
-			image = ImageIO.read(getClass().getResourceAsStream("/player/" + imageName + ".png"));
-			image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		return image;
+		this.up = setImage("/player/2.png");
+		this.down = setImage("/player/1.png");
+		this.left = setImage("/player/3.png");
+		this.right = setImage("/player/4.png");
 	}
 	
 	public void update()
@@ -109,7 +85,6 @@ public class Player extends Entity{
 				}
 			}
 		}
-		
 	}
 	
 	public void pickUpObject(int indexObject)
@@ -124,6 +99,7 @@ public class Player extends Entity{
 		}
 	}
 	
+	@Override
 	public void draw(Graphics2D g2)
 	{
 		BufferedImage img = null;

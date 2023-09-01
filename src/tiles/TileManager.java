@@ -71,10 +71,8 @@ public class TileManager {
 	
 	public void setup(int index, String imagePath, boolean collision)
 	{
-		UtilityTool uTool = new UtilityTool();
-		
 		tile[index] = new Tile("/tiles/" + imagePath + ".png");
-		tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize);
+		tile[index].image = UtilityTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize);
 		tile[index].collision = collision;
 	}
 	

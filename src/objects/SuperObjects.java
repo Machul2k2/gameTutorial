@@ -9,8 +9,6 @@ import test.UtilityTool;
 
 public class SuperObjects {
 	
-	UtilityTool uTool = new UtilityTool();
-
 	BufferedImage image;
 	
 	public String name;
